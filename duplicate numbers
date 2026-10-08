@@ -1,0 +1,30 @@
+//Problem 1 — Frequency
+
+// Contains Duplicate
+
+//Given an integer array nums, return true if any value appears at least twice, and return false if every element is distinct.
+
+//Example:
+
+//Input:  [1,2,3,1]
+//Output: true
+
+//This teaches:
+
+//Have I seen this before?
+
+const nums = [1, 2, 3, 1];
+
+//RETURN TRUE IF A VALUE APPEARS TWICE AND RETURN FALSE IF EVERY ELEMENT IS DISTINCT
+
+// here we will record the numbers we have seen
+const seen = new Map();
+
+for (i = 0; i < nums.length; i++) {
+  // if the map does not have the  then we add the number
+  if (!seen.has(nums[i])) {
+    seen.set(nums[i], true);
+  } else {
+    return nums[i] + "exists and is our duplicate ";
+  }
+}
