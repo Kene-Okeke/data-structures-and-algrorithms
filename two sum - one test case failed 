@@ -1,0 +1,49 @@
+//Problem 2 — Lookup / Complement
+
+//Two Sum
+
+//Given an array of integers nums and an integer target, return the indices of the two numbers that add up to target.
+
+//Example:
+//Output: [0,1]
+
+array = [2, 7, 11, 15];
+
+answer = 18;
+
+// we store the first number then check if the number we have seen + the next number is equal to the "target" if yes the
+// we return the indices
+
+// (2,0) - key the number , value the indices
+
+// things i can use store.has store.get store.set and store.delete
+
+function twosum(nums, target) {
+  // if we get to number the first number then we store it then
+  //after we store it on the next iteration we pull it and check against the remaining numbers
+  var move = 0;
+
+  var store = new Map();
+
+  i = 1;
+
+  while (i < nums.length && move < nums.length) {
+    store.set(move, nums[move]);
+
+    let pivotNumber = store.get(move);
+
+    if (pivotNumber + nums[i] == target) {
+      return [i, move];
+    } else if (i === nums.length - 1) {
+      move++;
+      i = move + 1;
+    } else {
+      i++;
+    }
+  }
+}
+
+twosum(Array, answer);
+
+nums = [3, 2, 4];
+target = 7;
