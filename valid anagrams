@@ -1,0 +1,42 @@
+//LeetCode 242 — Valid Anagram
+
+//Difficulty: Easy
+
+//Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+//An anagram is a word or phrase formed by rearranging the letters of another word or phrase, using all the original letters exactly once.
+
+//Example 1
+//Input: s = "anagram", t = "nagaram"
+//Output: true
+
+const s = "anagram";
+const t = "nagaram";
+
+// - here we will store frequency
+
+var Scount = new Map();
+var Tcount = new Map();
+var exists = new Map();
+
+var count = 0;
+var start = 0;
+
+var j = 1;
+
+for (i = 0; i < s.length; i++) {
+  // we are storing the frequencies of both in a map
+  if (t[start] === t[i + 1]) {
+    j++;
+    Tcount.set(t[start], j);
+  } else if (s[start] === s[i + 1]) {
+    Scount.set(s[start], j + 2);
+  } //else if (i === t.length - 1) {
+  //return { s } + { t } + "are not anagrams";
+  //}
+}
+
+//if (s[i] === t[i]) {
+//} else {
+//t++;
+//}
