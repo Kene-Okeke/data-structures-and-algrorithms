@@ -1,0 +1,62 @@
+//LeetCode 242 — Valid Anagram
+
+//Difficulty: Easy
+
+//Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+//An anagram is a word or phrase formed by rearranging the letters of another word or phrase, using all the original letters exactly once.
+
+//Example 1
+//Input: s = "anagram", t = "nagaram"
+//Output: true
+
+const s = "anagram";
+const t = "nagaram";
+
+// 1 loop one I different words s and t not seen store seen change value of key + 1
+
+//another problem since they ar enot the same length of words -
+//solved we handle that because if not the same length then they are not anagrams
+function isAnagrams(s, t) {
+  var sCount = new Map();
+  var tCount = new Map();
+
+  let isAnagrams = false;
+
+  if (s.length != t.length) {
+    return (isAnagrams = false);
+  }
+
+  for (i = 0; i < s.length; i++) {
+    if (!sCount.has(s[i])) {
+      sCount.set(s[i], 1);
+    } else {
+      count = sCount.get(s[i]);
+      sCount.set(s[i], count + 1);
+    }
+
+    if (!tCount.has(t[i])) {
+      tCount.set(t[i], 1);
+    } else {
+      countT = tCount.get(t[i]);
+      tCount.set(t[i], countT + 1);
+    }
+  }
+
+  for (key of sCount.keys()) {
+    if (!tCount.has(key)) {
+      return (isAnagrams = false);
+    }
+
+    if (tCount.has(key) && tCount.get(key) !== sCount.get(key)) {
+      return (isAnagrams = false);
+    }
+  }
+
+  return (isAnagrams = true);
+}
+
+console.log(isAnagrams("anagram", "nagaram"));
+console.log(isAnagrams("rat", "car"));
+console.log(isAnagrams("listen", "silent"));
+console.log(isAnagrams("aab", "aba"));

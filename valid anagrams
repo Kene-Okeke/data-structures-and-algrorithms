@@ -20,23 +20,33 @@ var Tcount = new Map();
 var exists = new Map();
 
 var count = 0;
-var start = 0;
+var startS = 0;
+var startT = 0;
 
 var j = 1;
+var v = 1;
 
 for (i = 0; i < s.length; i++) {
-  // we are storing the frequencies of both in a map
-  if (t[start] === t[i + 1]) {
-    j++;
-    Tcount.set(t[start], j);
-  } else if (s[start] === s[i + 1]) {
-    Scount.set(s[start], j + 2);
-  } //else if (i === t.length - 1) {
-  //return { s } + { t } + "are not anagrams";
-  //}
-}
+  // get all frequencies for the strings s and t and store them in seperate maps
 
-//if (s[i] === t[i]) {
-//} else {
-//t++;
-//}
+  // move start only if we have gone through the rest of the words
+  if (i === t.length - 1) {
+    i = 0;
+    startT++;
+  }
+
+  if (i === s.length - 1) {
+    i = 0;
+    startS++;
+  }
+
+  if (t[startT] === t[i + 1]) {
+    j++;
+    Tcount.set(t[starT], j);
+  }
+
+  if (s[startS] === s[i + 1]) {
+    v++;
+    Scount.set(s[startS], v);
+  }
+}
