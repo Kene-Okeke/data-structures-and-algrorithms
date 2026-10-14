@@ -1,0 +1,77 @@
+// Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+//Input: strs = ["eat","tea","tan","ate","nat","bat"]
+
+const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+
+//group all words that are anagrams in this array
+
+grouped = new Map();
+
+// we'll use two loops to get our array looped through correctly
+
+fullGrouping = [];
+
+for (i = 0; i < strs.length; i++) {
+  set = [];
+  if (grouped.has(strs[i])) {
+    set.push(strs[i]);
+  }
+
+  for (j = i + 1; j < strs.length; j++) {
+    if (is_Anagram(strs[i], strs[j]) && !grouped.has(strs[j])) {
+      set.push(strs[j]);
+      grouped.set(strs[i], true);
+      grouped.set(strs[j], true);
+    }
+  }
+  fullGrouping.push(set);
+}
+
+s = "eat";
+t = "tea";
+
+function is_Anagram(s, t) {
+  let is_Anagram = false;
+
+  sCount = new Map();
+  tCount = new Map();
+
+  // if the two words are not the same length they cannot be anagrams
+  if (!s.length === t.length) {
+    return (is_Anagram = false);
+  }
+
+  // save the word s and its frequencies as letter and frequency as key value pair
+  for (i = 0; i < s.length; i++) {
+    if (sCount.has(s[i])) {
+      const count = sCount.get(s[i]);
+      countS = count + 1;
+      sCount.set(s[i], countS);
+    } else {
+      sCount.set(s[i], 1);
+    }
+  }
+  // save the word t and its frequencies  as letter and frequency as key value pair
+  for (i = 0; i < t.length; i++) {
+    if (tCount.has(t[i])) {
+      const count = tCount.get(t[i]);
+      countT = count + 1;
+      tCount.set(t[i], countT);
+    } else {
+      tCount.set(t[i], 1);
+    }
+  }
+
+  for (key of sCount.keys()) {
+    if (!tCount.has(key)) {
+      return (is_Anagram = false);
+    }
+
+    if (tCount.has(key) && !tCount.get(key) === sCount.get(key)) {
+      return (is_Anagram = false);
+    }
+  }
+
+  return (is_Anagram = true);
+}
